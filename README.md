@@ -133,50 +133,6 @@ var cryptoScreener = await new Query()
     .GetScannerDataRawAsync();
 ```
 
-## Best Practices
-
-1. **Rate Limiting**: Implement delays between requests to avoid hitting rate limits:
-```csharp
-private async Task<T> RetryWithBackoff<T>(Func<Task<T>> operation, int maxAttempts = 3)
-{
-    for (int i = 1; i <= maxAttempts; i++)
-    {
-        try
-        {
-            return await operation();
-        }
-        catch (HttpRequestException) when (i < maxAttempts)
-        {
-            await Task.Delay(TimeSpan.FromSeconds(Math.Pow(2, i)));
-        }
-    }
-    throw new Exception("Max retry attempts reached");
-}
-```
-
-2. **Large Datasets**: Process results in batches for large datasets:
-```csharp
-public async IAsyncEnumerable<ScreenerRow> GetResultsInBatches(int batchSize = 100)
-{
-    int offset = 0;
-    while (true)
-    {
-        var batch = await new Query()
-            .Select("name", "close", "volume")
-            .Offset(offset)
-            .Limit(batchSize)
-            .GetScannerDataRawAsync();
-            
-        if (!batch.Data.Any()) break;
-        
-        foreach (var row in batch.Data)
-            yield return row;
-            
-        offset += batchSize;
-    }
-}
-```
-
 ## Known Limitation
 
 1. Complex AND/OR filters using `Where2()` may not work reliably. Use simple filters with `Where()` instead.
@@ -200,13 +156,6 @@ dotnet restore
 ```bash
 dotnet test
 ```
-
-### Coding Standards
-
-- Follow C# coding conventions
-- Include XML documentation for public members
-- Add unit tests for new features
-- Update README for significant changes
 
 ## License
 
