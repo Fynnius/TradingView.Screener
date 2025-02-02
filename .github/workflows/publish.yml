@@ -1,0 +1,36 @@
+name: Publish to NuGet
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.101'
+        
+    - name: Restore dependencies
+      run: dotnet restore TradingView.Screener.sln
+      
+    - name: Build
+      run: dotnet build TradingView.Screener.sln --configuration Release
+      
+    - name: Test
+      run: dotnet test TradingView.Screener.sln --configuration Release
+      
+    - name: Pack
+      run: |
+        mkdir -p nupkg
+        dotnet pack src/TradingView.Screener/TradingView.Screener.csproj --configuration Release --output nupkg
+        dotnet pack src/TradingView.Screener.Cli/TradingView.Screener.Cli.csproj --configuration Release --output nupkg
+
+    - name: Push to NuGet
+      run: dotnet nuget push "nupkg/*.nupkg" --api-key ${{secrets.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json --skip-duplicate 
