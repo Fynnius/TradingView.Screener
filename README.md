@@ -9,7 +9,7 @@ A C# port of the [TradingView-Screener Python package](https://github.com/shner-
 This project is a C# port of the excellent [TradingView-Screener](https://github.com/shner-elmo/TradingView-Screener) Python package by [shner-elmo](https://github.com/shner-elmo). All credit for the original implementation and API research goes to them.
 
 ## Requirements
-- .NET 9.0 or later
+- Only tested on .NET 9.0
 
 ## Installation
 
