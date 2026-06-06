@@ -42,4 +42,6 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: nuget-packages
-        path: nupkg/*.nupkg 
+        path: |
+          nupkg/*.nupkg
+          nupkg/*.snupkg
