@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{48ABDFE0-354
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingView.Screener.Cli", "src\TradingView.Screener.Cli\TradingView.Screener.Cli.csproj", "{A8E49449-EED6-4602-B164-AC27CBFCD069}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradingView.Screener", "src\TradingView.Screener\TradingView.Screener.csproj", "{46BFB613-430F-484F-9448-0259AFB8E856}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,9 +30,14 @@ Global
 		{A8E49449-EED6-4602-B164-AC27CBFCD069}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8E49449-EED6-4602-B164-AC27CBFCD069}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8E49449-EED6-4602-B164-AC27CBFCD069}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46BFB613-430F-484F-9448-0259AFB8E856}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46BFB613-430F-484F-9448-0259AFB8E856}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46BFB613-430F-484F-9448-0259AFB8E856}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46BFB613-430F-484F-9448-0259AFB8E856}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6CBC2445-979B-490E-B60D-C184837264BC} = {FBA3C322-E1A8-4EAE-BC39-CC4838AA1249}
 		{A8E49449-EED6-4602-B164-AC27CBFCD069} = {48ABDFE0-354C-45F5-8E31-9C903CCBB9DF}
+		{46BFB613-430F-484F-9448-0259AFB8E856} = {48ABDFE0-354C-45F5-8E31-9C903CCBB9DF}
 	EndGlobalSection
 EndGlobal
