@@ -42,7 +42,8 @@ using static TradingView.Screener.Columns;
 
 // Basic query - Get top stocks by volume
 var result = await new Query()
-    .Select("name", "close", "volume", "market_cap_basic")
+    .Select(Name, Close, Volume, MarketCap)
+    .OrderBy(Volume, ascending: false)
     .Limit(5)
     .GetScannerDataRawAsync();
 
