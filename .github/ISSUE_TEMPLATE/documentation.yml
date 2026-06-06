@@ -1,0 +1,24 @@
+name: Documentation
+description: Report unclear, missing, or outdated documentation.
+title: "[Docs]: "
+labels: ["documentation"]
+body:
+  - type: textarea
+    id: location
+    attributes:
+      label: Documentation location
+      description: Link to the README section, file, or package page where the issue appears.
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: What is unclear or missing?
+      description: Describe the documentation problem.
+    validations:
+      required: true
+  - type: textarea
+    id: suggested-change
+    attributes:
+      label: Suggested change
+      description: Share proposed wording, examples, or links if you have them.
