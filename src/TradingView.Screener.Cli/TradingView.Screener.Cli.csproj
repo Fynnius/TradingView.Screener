@@ -25,6 +25,7 @@
     <PackageProjectUrl>https://github.com/Fynnius/TradingView.Screener</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Fynnius/TradingView.Screener.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     
     <!-- Documentation -->
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -33,10 +34,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TradingView.Screener\TradingView.Screener.csproj" />
+    <None Include="../../README.md" Pack="true" PackagePath="/" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.CommandLineUtils" Version="1.1.1" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>
