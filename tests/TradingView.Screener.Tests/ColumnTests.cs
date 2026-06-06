@@ -156,6 +156,21 @@ public class ColumnTests
     }
 
     [Fact]
+    public void HasNoneOf_ShouldCreateCorrectFilterOperation()
+    {
+        // Arrange
+        var column = new Column("typespecs");
+
+        // Act
+        var filter = column.HasNoneOf(new[] { "etf" });
+
+        // Assert
+        Assert.Equal("typespecs", filter.Left);
+        Assert.Equal(FilterOperationType.HasNoneOf, filter.Operation);
+        Assert.Equal(new[] { "etf" }, filter.Right);
+    }
+
+    [Fact]
     public void Crosses_ShouldCreateCorrectFilterOperation()
     {
         // Arrange
@@ -168,6 +183,38 @@ public class ColumnTests
         // Assert
         Assert.Equal("close", filter.Left);
         Assert.Equal(FilterOperationType.Crosses, filter.Operation);
+        Assert.Equal("sma20", filter.Right);
+    }
+
+    [Fact]
+    public void CrossesAbove_ShouldCreateCorrectFilterOperation()
+    {
+        // Arrange
+        var column = new Column("close");
+        var other = new Column("sma20");
+
+        // Act
+        var filter = column.CrossesAbove(other);
+
+        // Assert
+        Assert.Equal("close", filter.Left);
+        Assert.Equal(FilterOperationType.CrossesAbove, filter.Operation);
+        Assert.Equal("sma20", filter.Right);
+    }
+
+    [Fact]
+    public void CrossesBelow_ShouldCreateCorrectFilterOperation()
+    {
+        // Arrange
+        var column = new Column("close");
+        var other = new Column("sma20");
+
+        // Act
+        var filter = column.CrossesBelow(other);
+
+        // Assert
+        Assert.Equal("close", filter.Left);
+        Assert.Equal(FilterOperationType.CrossesBelow, filter.Operation);
         Assert.Equal("sma20", filter.Right);
     }
 
@@ -214,6 +261,21 @@ public class ColumnTests
         // Assert
         Assert.Equal("earnings_date", filter.Left);
         Assert.Equal(FilterOperationType.Empty, filter.Operation);
+        Assert.Null(filter.Right);
+    }
+
+    [Fact]
+    public void NotEmpty_ShouldCreateCorrectFilterOperation()
+    {
+        // Arrange
+        var column = new Column("earnings_date");
+
+        // Act
+        var filter = column.NotEmpty();
+
+        // Assert
+        Assert.Equal("earnings_date", filter.Left);
+        Assert.Equal(FilterOperationType.NotEmpty, filter.Operation);
         Assert.Null(filter.Right);
     }
 } 
