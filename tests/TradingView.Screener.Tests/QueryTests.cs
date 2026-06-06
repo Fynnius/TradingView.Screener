@@ -27,6 +27,20 @@ public class QueryTests
     }
 
     [Fact]
+    public void Select_ShouldAcceptStringColumns()
+    {
+        // Arrange
+        var query = new Query();
+
+        // Act
+        query.Select("name", "close", "Volatility.D");
+
+        // Assert
+        var request = GetQueryRequest(query);
+        Assert.Equal(new[] { "name", "close", "Volatility.D" }, request.Columns);
+    }
+
+    [Fact]
     public void Where_ShouldAddFiltersToRequest()
     {
         // Arrange
@@ -85,6 +99,21 @@ public class QueryTests
         Assert.NotNull(request.Sort);
         Assert.Equal("volume", request.Sort.SortByColumn);
         Assert.Equal("desc", request.Sort.SortOrder);
+    }
+
+    [Fact]
+    public void OrderBy_ShouldIncludeNullsFirstWhenProvided()
+    {
+        // Arrange
+        var query = new Query();
+
+        // Act
+        query.OrderBy(MarketCap, nullsFirst: true);
+
+        // Assert
+        var request = GetQueryRequest(query);
+        Assert.NotNull(request.Sort);
+        Assert.True(request.Sort.NullsFirst);
     }
 
     [Fact]
@@ -168,6 +197,28 @@ public class QueryTests
         Assert.Equal("volume", request.Sort.SortByColumn);
         Assert.Equal("desc", request.Sort.SortOrder);
         Assert.Equal(new[] { 0, 10 }, request.Range);
+    }
+
+    [Fact]
+    public void Copy_ShouldCreateIndependentQuery()
+    {
+        // Arrange
+        var query = new Query()
+            .Select(Name, Close)
+            .Where(Close > 100)
+            .Limit(10);
+
+        // Act
+        var copy = query.Copy();
+        copy.Select(Name, Volume).Limit(5);
+
+        // Assert
+        var originalRequest = GetQueryRequest(query);
+        var copyRequest = GetQueryRequest(copy);
+        Assert.Equal(new[] { "name", "close" }, originalRequest.Columns);
+        Assert.Equal(new[] { 0, 10 }, originalRequest.Range);
+        Assert.Equal(new[] { "name", "volume" }, copyRequest.Columns);
+        Assert.Equal(new[] { 0, 5 }, copyRequest.Range);
     }
 
     private static QueryRequest GetQueryRequest(Query query)
