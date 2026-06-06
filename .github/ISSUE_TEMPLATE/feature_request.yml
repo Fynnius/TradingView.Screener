@@ -1,0 +1,42 @@
+name: Feature request
+description: Suggest an improvement to the library, CLI, docs, or packaging.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or use case
+      description: What are you trying to do, and why is the current project not enough?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the API, CLI option, documentation, or workflow you would like.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Mention any workaround or different API shape you considered.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Library API
+        - CLI
+        - Documentation
+        - Packaging or release
+        - CI or tests
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Add examples, links to upstream Python behavior, or TradingView API notes if useful.
